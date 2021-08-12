@@ -1,0 +1,19 @@
+#!/bin/bash
+
+arg=$1
+
+if [ $arg == "openrc"  ]; then
+	mkdir /mnt/gentoo
+	cd /mnt/gentoo
+	wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20210801T170533Z/stage3-amd64-openrc-20210801T170533Z.tar.xz
+	tar xpvf stage3-amd64-openrc-20210801T170533Z.tar.xz --xattrs-include='*.*' --numeric-owner 
+	echo "done, continue on line 16 in help"
+fi
+
+if [ $arg == "systemd" ]; then
+	mkdir /mnt/gentoo
+	cd /mnt/gentoo
+	wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20210801T170533Z/stage3-amd64-systemd-20210801T170533Z.tar.xz
+	tar xpvf stage3-amd64-systemd-20210801T170533Z.tar.xz --xattrs-include='*.*' --numeric-owner
+	echo "done, continue on line 16 in help"
+fi

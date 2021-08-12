@@ -1,0 +1,37 @@
+disks
+-----------------------------------------------------
+boot	/boot	(/dev/nvme0n1p4)	260M	fat32
+swap	-	(/dev/nvme0n1p5)	6G	-
+root	/	(/dev/nvme0n1p6)	rest	ext4
+-----------------------------------------------------
+
+make filesystems (install dosfstools)
+mount root at /mnt/gentoo
+stage3 script - automatic
+
+/etc/portage/make.conf - cflags,cxxflags,makeopts
+
+dns+mounting - mounts script - automatic
+
+manually:
+	chroot /mnt/gentoo
+	source /etc/profile
+	export PS1="(chroot) ${PS1}"
+
+mount boot
+emerge-webrsync 
+eselect profile 
+emerge --ask --verbose --update --deep --newuse @world
+edit USE flag
+
+openrc:
+	echo "Europe/Prague" > /etc/timezone
+	emerge --config sys-libs/timezone-data
+systemd:
+	ln -sf ../usr/share/zoneinfo/Europe/Prague /etc/localtime
+
+select locales
+env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
+check with mount - if mounts script alright
+configure the kernel
